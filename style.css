@@ -58,3 +58,16 @@ a {
     background-color: #003e80; /* 鼠標按下時的背景顏色 */
     transform: scale(0.95); /* 鼠標按下時的縮放效果 */
 }
+
+.avatar {
+    width: 100px; /* 調整頭像大小 */
+    height: 100px;
+    border: 2px solid #b3ff00; /* 邊框顏色和寬度 */
+    border-radius: 50%; /* 使頭像呈圓形 */
+    transition: border-color 0.3s, transform 0.2s;
+}
+
+.avatar:hover {
+    border-color: #51b300; /* 鼠標懸停時的邊框顏色 */
+    transform: scale(1.1); /* 鼠標懸停時的縮放效果 */
+}

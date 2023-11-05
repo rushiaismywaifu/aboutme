@@ -1,0 +1,12 @@
+body {
+    cursor: none; /* 隱藏系統鼠標 */
+}
+
+.custom-cursor {
+    position: absolute;
+    width: 20px; /* 自訂鼠標的大小 */
+    height: 20px;
+    background-color: #007bff; /* 自訂鼠標的顏色 */
+    border-radius: 50%;
+    pointer-events: none; /* 防止鼠標事件被阻擋 */
+}

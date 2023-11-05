@@ -3,11 +3,11 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Noto Sans TC', 'Arial', sans-serif; /* 使用你喜歡的字體 */
-    background-color: rgb(62, 235, 27), 255, 255); /* 如果你想要改變背景色，請修改這裡 */
+    background-color: rgb(37, 171, 233), 255, 255); /* 如果你想要改變背景色，請修改這裡 */
 }
 
 .background {
-    background-image: url('https://raw.githubusercontent.com/rushiaismywaifu/rushiaismywaifu.github.io/main/d.png'); /* 背景圖片的 URL */
+    background-image: url('https://pbs.twimg.com/media/FrdJV3bakAEknER?format=png&name=4096x4096'); /* 背景圖片的 URL */
     background-size: cover;
     background-position: center;
     background-attachment: fixed; /* 固定背景，不影響閱讀內容 */
@@ -19,7 +19,7 @@ body {
 
 .content {
     text-align: center;
-    color: #c626d4; /* 字體顏色 */
+    color: #30dd38; /* 字體顏色 */
     background-color: rgba(0, 0, 0, 0.6); /* 背景色和透明度，以達到不影響內容 */
     padding: 20px;
     border-radius: 10px;
@@ -34,4 +34,27 @@ a {
     color: #00f; /* 超連結顏色 */
     text-decoration: none;
     margin: 0 10px;
+}
+
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff; /* 正常狀態下的背景顏色 */
+    color: #fff; /* 正常狀態下的文字顏色 */
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s, transform 0.2s;
+    cursor: pointer;
+    margin: 10px;
+}
+
+.button:hover {
+    background-color: #0056b3; /* 鼠標懸停時的背景顏色 */
+    transform: scale(1.05); /* 鼠標懸停時的縮放效果 */
+}
+
+.button:active {
+    background-color: #003e80; /* 鼠標按下時的背景顏色 */
+    transform: scale(0.95); /* 鼠標按下時的縮放效果 */
 }

@@ -10,3 +10,12 @@ body {
     border-radius: 50%;
     pointer-events: none; /* 防止鼠標事件被阻擋 */
 }
+
+.particle {
+    position: absolute;
+    width: 4px; /* 你可以調整粒子的大小 */
+    height: 4px;
+    background-color: #007bff; /* 你可以調整粒子的顏色 */
+    border-radius: 50%;
+    pointer-events: none; /* 防止鼠標事件被阻擋 */
+}

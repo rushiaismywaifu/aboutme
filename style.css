@@ -1,73 +1,260 @@
-@import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
-body {
+/* ==================== Reset & Base ==================== */
+*,
+*::before,
+*::after {
     margin: 0;
     padding: 0;
-    font-family: 'Noto Sans TC', 'Arial', sans-serif; /* 使用你喜歡的字體 */
-    background-color: rgb(37, 171, 233), 255, 255); /* 如果你想要改變背景色，請修改這裡 */
+    box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Noto Sans TC', 'Arial', sans-serif;
+    background-color: #0a0a1a;
+    overflow: hidden;
+}
+
+/* ==================== Custom Cursor ==================== */
+body {
+    cursor: none;
+}
+
+.custom-cursor {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    background: radial-gradient(circle, rgba(0, 123, 255, 0.8), rgba(0, 123, 255, 0.2));
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: width 0.2s, height 0.2s, opacity 0.2s;
+    mix-blend-mode: screen;
+}
+
+.custom-cursor.hovering {
+    width: 40px;
+    height: 40px;
+    background: radial-gradient(circle, rgba(0, 123, 255, 0.4), rgba(0, 123, 255, 0.1));
+    border: 2px solid rgba(0, 123, 255, 0.6);
+}
+
+#particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9998;
+}
+
+/* 觸控裝置隱藏自訂游標 */
+@media (hover: none) and (pointer: coarse) {
+    body {
+        cursor: auto;
+    }
+    .custom-cursor,
+    #particles {
+        display: none;
+    }
+}
+
+/* ==================== Background ==================== */
 .background {
-    background-image: url('https://pbs.twimg.com/media/FrdJV3bakAEknER?format=png&name=4096x4096'); /* 背景圖片的 URL */
+    background-image: url('https://pbs.twimg.com/media/FrdJV3bakAEknER?format=png&name=4096x4096');
     background-size: cover;
     background-position: center;
-    background-attachment: fixed; /* 固定背景，不影響閱讀內容 */
-    height: 100vh;
+    background-attachment: fixed;
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
 }
 
+/* 背景暗化疊層 */
+.background::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        ellipse at center,
+        rgba(0, 0, 0, 0.3) 0%,
+        rgba(0, 0, 0, 0.7) 100%
+    );
+    z-index: 1;
+}
+
+/* ==================== Content Card ==================== */
 .content {
+    position: relative;
+    z-index: 2;
     text-align: center;
-    color: #30dd38; /* 字體顏色 */
-    background-color: rgba(0, 0, 0, 0.6); /* 背景色和透明度，以達到不影響內容 */
-    padding: 20px;
-    border-radius: 10px;
+    color: #e0e0e0;
+    padding: 40px 50px;
+    border-radius: 20px;
+    max-width: 420px;
+    width: 90%;
+
+    /* Glassmorphism 毛玻璃效果 */
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.4),
+        inset 0 0 80px rgba(255, 255, 255, 0.02);
+
+    /* 入場動畫 */
+    animation: fadeInUp 0.8s ease-out;
 }
 
-img {
-    width: 100px; /* 調整頭像大小 */
-    border-radius: 50%; /* 使頭像呈圓形 */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
 }
 
-a {
-    color: #00f; /* 超連結顏色 */
-    text-decoration: none;
-    margin: 0 10px;
-}
-
-.button {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #007bff; /* 正常狀態下的背景顏色 */
-    color: #fff; /* 正常狀態下的文字顏色 */
-    border: none;
-    border-radius: 5px;
-    text-decoration: none;
-    transition: background-color 0.3s, transform 0.2s;
-    cursor: pointer;
-    margin: 10px;
-}
-
-.button:hover {
-    background-color: #0056b3; /* 鼠標懸停時的背景顏色 */
-    transform: scale(1.05); /* 鼠標懸停時的縮放效果 */
-}
-
-.button:active {
-    background-color: #003e80; /* 鼠標按下時的背景顏色 */
-    transform: scale(0.95); /* 鼠標按下時的縮放效果 */
-}
-
+/* ==================== Avatar ==================== */
 .avatar {
-    width: 100px; /* 調整頭像大小 */
-    height: 100px;
-    border: 2px solid #b3ff00; /* 邊框顏色和寬度 */
-    border-radius: 50%; /* 使頭像呈圓形 */
-    transition: border-color 0.3s, transform 0.2s;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 3px solid rgba(0, 200, 100, 0.6);
+    object-fit: cover;
+    transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+    box-shadow: 0 0 20px rgba(0, 200, 100, 0.2);
+    animation: avatarFloat 3s ease-in-out infinite;
+}
+
+@keyframes avatarFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
 }
 
 .avatar:hover {
-    border-color: #51b300; /* 鼠標懸停時的邊框顏色 */
-    transform: scale(1.1); /* 鼠標懸停時的縮放效果 */
+    border-color: rgba(0, 255, 120, 0.9);
+    transform: scale(1.1) translateY(-4px);
+    box-shadow: 0 0 30px rgba(0, 255, 120, 0.4);
+    animation-play-state: paused;
+}
+
+/* ==================== Typography ==================== */
+.title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 16px 0 8px;
+    background: linear-gradient(135deg, #30dd38, #00d4ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.subtitle {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 24px;
+    letter-spacing: 1px;
+}
+
+/* ==================== Buttons ==================== */
+.button-group {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.button {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 12px 28px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    border: none;
+    border-radius: 12px;
+    cursor: none;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+
+    /* 漸層背景 */
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+}
+
+.button-secondary {
+    background: linear-gradient(135deg, #6f42c1, #5a2d9e);
+    box-shadow: 0 4px 15px rgba(111, 66, 193, 0.3);
+}
+
+/* 按鈕光澤動畫 */
+.button::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent
+    );
+    transform: rotate(45deg) translateX(-100%);
+    transition: transform 0.6s ease;
+}
+
+.button:hover::after {
+    transform: rotate(45deg) translateX(100%);
+}
+
+.button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 123, 255, 0.5);
+}
+
+.button-secondary:hover {
+    box-shadow: 0 8px 25px rgba(111, 66, 193, 0.5);
+}
+
+.button:active {
+    transform: translateY(0) scale(0.97);
+}
+
+.button-icon {
+    font-size: 1.1rem;
+}
+
+/* ==================== Responsive ==================== */
+@media (max-width: 480px) {
+    .content {
+        padding: 30px 24px;
+    }
+
+    .title {
+        font-size: 1.6rem;
+    }
+
+    .avatar {
+        width: 100px;
+        height: 100px;
+    }
+
+    .button {
+        padding: 10px 22px;
+        font-size: 0.9rem;
+    }
 }

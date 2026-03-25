@@ -1,30 +1,56 @@
 <!DOCTYPE html>
-<html prefix="og: http://ogp.me/ns#">
+<html lang="zh-TW" prefix="og: http://ogp.me/ns#">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <link rel="stylesheet" href="cursor.css">
-    <link rel="icon" href="https://raw.githubusercontent.com/rushiaismywaifu/rushiaismywaifu.github.io/main/favicon.ico" type="image/x-icon">
-    <title>死靈法師</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Rushia我婆 - 死靈法師的個人網站">
+    <meta name="theme-color" content="#007bff">
+
+    <!-- Open Graph -->
     <meta property="og:title" content="Rushia我婆">
     <meta property="og:description" content="雖然她死ㄌ">
     <meta property="og:url" content="https://rushiaismywaifu.github.io/aboutme">
     <meta property="og:image" content="https://raw.githubusercontent.com/rushiaismywaifu/rushiaismywaifu.github.io/main/image.png">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Rushia My Beloved">
+
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="https://raw.githubusercontent.com/rushiaismywaifu/rushiaismywaifu.github.io/main/favicon.ico" type="image/x-icon">
+    <title>死靈法師</title>
 </head>
-<body align="center">
-<div class="custom-cursor"></div>
+<body>
+    <!-- 自訂游標 (僅桌面端) -->
+    <div class="custom-cursor" id="cursor"></div>
+    <canvas id="particles"></canvas>
+
     <div class="background">
         <div class="content">
-            <img src="https://raw.githubusercontent.com/rushiaismywaifu/rushiaismywaifu.github.io/main/image.png" alt="你的頭像" class="avatar">
-            <h1>Rushia我婆</h1>
-            <p>這是我的網站</p>
-            <a href="https://rushiaismywaifu.github.io" class="button">Rushia</a>
-            <a href="https://chikenscrach.github.io" class="button">Rurudo</a>
+            <img
+                src="https://raw.githubusercontent.com/rushiaismywaifu/rushiaismywaifu.github.io/main/image.png"
+                alt="Rushia 頭像"
+                class="avatar"
+                loading="lazy"
+            >
+            <h1 class="title">Rushia我婆</h1>
+            <p class="subtitle">這是我的網站</p>
+            <div class="button-group">
+                <a href="https://rushiaismywaifu.github.io" class="button">
+                    <span class="button-icon">🦋</span>
+                    Rushia
+                </a>
+                <a href="https://chikenscrach.github.io" class="button button-secondary">
+                    <span class="button-icon">🎨</span>
+                    Rurudo
+                </a>
+            </div>
         </div>
     </div>
-<script src="main.js"></script>
+
+    <script src="main.js"></script>
 </body>
 </html>

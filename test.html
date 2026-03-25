@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Toggle Switch</title>
+  <style>
+    /* ===== 1. 設計令牌集中管理 ===== */
+    :root {
+      --grid-color: #f1f2f3;
+      --bg-color: #fff;
+      --toggle-off: #c7cad1;
+      --toggle-mid: #829ad6;
+      --toggle-on: #255ff4;
+      --duration: 0.5s;
+      --easing: cubic-bezier(0.6, 0, 0.4, 1);
+    }
+
+    /* ===== 2. 暗色模式只需覆寫變數 ===== */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --grid-color: #3a3d46;
+        --bg-color: #2e3138;
+        --toggle-off: #5c6270;
+        --toggle-mid: #3d5fb6;
+      }
+    }
+
+    /* ===== 3. Reset 含 ::before/::after ===== */
+    *,
+    *::before,
+    *::after {
+      border: 0;
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* ===== 4. Body ===== */
+    body {
+      font: 80px / 1.5 sans-serif;
+      background-image:
+        linear-gradient(90deg, var(--grid-color) 2px, transparent 2px),
+        linear-gradient(var(--grid-color) 2px, var(--bg-color) 2px);
+      background-size: 0.75em 0.375em;
+      background-position: 50% calc(50% + 0.2em);
+      display: grid;
+      place-items: center;
+      min-height: 100vh;
+      min-height: 100dvh; /* 現代瀏覽器優先採用 dvh */
+    }
+
+    /* ===== 5. 無障礙：螢幕閱讀器專用文字 ===== */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+
+    /* ===== 6. Toggle 元件 ===== */
+    .toggle {
+      font: inherit; /* 確保 em 單位與 body 一致 */
+      animation: bg-off var(--duration) var(--easing);
+      background-color: var(--toggle-off);
+      border-radius: 0.67em / 0.5em;
+      box-shadow:
+        0 0.05em 0.1em #00000007 inset,
+        0 -0.25em 0.25em #0001 inset,
+        0 -0.5em 0 #0001 inset,
+        0 0.1em 0.1em #0001;
+      cursor: pointer;
+      position: relative;
+      width: 2.25em;
+      height: 1.5em;
+      appearance: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .toggle::before {
+      content: "";
+      animation: handle-off var(--duration) var(--easing);
+      background-image:
+        linear-gradient(90deg, var(--grid-color) 2px, transparent 2px),
+        linear-gradient(var(--grid-color) 2px, var(--bg-color) 2px);
+      background-attachment: fixed;
+      background-size: 0.75em 0.375em;
+      background-position: 50% calc(50% - 0.1875em);
+      border-radius: 0.5em / 0.375em;
+      box-shadow:
+        0 0.175em 0.175em 0 #0001 inset,
+        0 0.375em 0 #0002 inset,
+        0 0.375em 0 var(--toggle-off) inset,
+        0 0.475em 0.1em #0001 inset;
+      display: block;
+      position: absolute;
+      top: 0.125em;
+      left: 0.125em;
+      width: 1em;
+      height: 0.75em;
+    }
+
+    /* Checked 狀態 */
+    .toggle:checked {
+      animation: bg-on var(--duration) var(--easing) forwards;
+    }
+
+    .toggle:checked::before {
+      animation: handle-on var(--duration) var(--easing) forwards;
+    }
+
+    /* 7. 鍵盤 focus 可見指示（取代 outline:none） */
+    .toggle:focus-visible {
+      outline: 3px solid var(--toggle-on);
+      outline-offset: 4px;
+    }
+
+    /* 8. data 屬性取代 class 控制初始狀態 */
+    .toggle[data-pristine],
+    .toggle[data-pristine]::before {
+      animation: none;
+    }
+
+    /* 9. 尊重使用者動態偏好 */
+    @media (prefers-reduced-motion: reduce) {
+      .toggle,
+      .toggle::before {
+        animation: none !important;
+      }
+    }
+
+    /* ===== Animations ===== */
+    @keyframes bg-off {
+      from  { background-color: var(--toggle-on); }
+      50%   { background-color: var(--toggle-mid); }
+      to    { background-color: var(--toggle-off); }
+    }
+
+    @keyframes bg-on {
+      from  { background-color: var(--toggle-off); }
+      50%   { background-color: var(--toggle-mid); }
+      to    { background-color: var(--toggle-on); }
+    }
+
+    @keyframes handle-off {
+      from {
+        box-shadow:
+          0 0.175em 0.175em 0 #0001 inset,
+          0 0.375em 0 #0002 inset,
+          0 0.375em 0 var(--toggle-on) inset,
+          0 0.475em 0.1em #0001 inset;
+        left: 1.125em;
+        width: 1em;
+      }
+      50% {
+        box-shadow:
+          0 0.175em 0.175em 0 #0001 inset,
+          0 0.375em 0 #0002 inset,
+          0 0.375em 0 var(--toggle-mid) inset,
+          0 0.475em 0.1em #0001 inset;
+        left: 0.125em;
+        width: 2em;
+      }
+      to {
+        box-shadow:
+          0 0.175em 0.175em 0 #0001 inset,
+          0 0.375em 0 #0002 inset,
+          0 0.375em 0 var(--toggle-off) inset,
+          0 0.475em 0.1em #0001 inset;
+        left: 0.125em;
+        width: 1em;
+      }
+    }
+
+    @keyframes handle-on {
+      from {
+        box-shadow:
+          0 0.175em 0.175em 0 #0001 inset,
+          0 0.375em 0 #0002 inset,
+          0 0.375em 0 var(--toggle-off) inset,
+          0 0.475em 0.1em #0001 inset;
+        left: 0.125em;
+        width: 1em;
+      }
+      50% {
+        box-shadow:
+          0 0.175em 0.175em 0 #0001 inset,
+          0 0.375em 0 #0002 inset,
+          0 0.375em 0 var(--toggle-mid) inset,
+          0 0.475em 0.1em #0001 inset;
+        left: 0.125em;
+        width: 2em;
+      }
+      to {
+        box-shadow:
+          0 0.175em 0.175em 0 #0001 inset,
+          0 0.375em 0 #0002 inset,
+          0 0.375em 0 var(--toggle-on) inset,
+          0 0.475em 0.1em #0001 inset;
+        left: 1.125em;
+        width: 1em;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 10. 語意化：label 包裹 + role="switch" -->
+  <label>
+    <span class="sr-only">切換開關</span>
+    <input type="checkbox" class="toggle" role="switch" data-pristine>
+  </label>
+
+  <script>
+    // 11. 精簡 JS：只執行一次就夠了
+    const toggle = document.querySelector(".toggle");
+    toggle.addEventListener("click", () => {
+      toggle.removeAttribute("data-pristine");
+    }, { once: true });
+  </script>
+
+</body>
+</html>

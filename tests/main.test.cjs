@@ -28,6 +28,9 @@ function setup({ stored = null, reduced = false, blocked = false } = {}) {
   };
   const document = {
     hidden: false,
+    dispatchEvent(event) {
+      events.ambience = event.detail.active;
+    },
     body: {
       classList: {
         toggle(name, enabled) {
@@ -57,6 +60,12 @@ function setup({ stored = null, reduced = false, blocked = false } = {}) {
     localStorage: storage,
     document,
     Date,
+    CustomEvent: class {
+      constructor(type, options) {
+        this.type = type;
+        this.detail = options.detail;
+      }
+    },
   });
   return { classes, events, toggle, media, document, saved: () => stored };
 }
@@ -67,6 +76,7 @@ test("ambient control works and saves the preference", () => {
   assert.equal(app.toggle["aria-pressed"], "true");
   app.events.click();
   assert.equal(app.saved(), "off");
+  assert.equal(app.events.ambience, false);
   assert.equal(app.toggle["aria-pressed"], "false");
   assert.equal(app.classes.has("effects-on"), false);
   app.events.click();

@@ -923,3 +923,57 @@ h1 {
   cursor: not-allowed;
   opacity: 0.65;
 }
+
+/* Small, pooled cursor decorations; native pointer remains usable without JS. */
+.pointer-effects {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 20;
+  contain: strict;
+}
+.pointer-effects[hidden] {
+  display: none;
+}
+.pointer-halo,
+.pointer-particle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+.pointer-halo::before {
+  content: "";
+  display: block;
+  width: 28px;
+  height: 28px;
+  margin: -14px;
+  border: 1px solid #b1d4b560;
+  border-radius: 50%;
+  background: radial-gradient(circle, #b1d4b528, #b1d4b505 70%);
+  transition:
+    transform 150ms ease,
+    border-color 150ms ease;
+}
+.pointer-halo.is-interactive::before {
+  transform: scale(1.4);
+  border-color: #b1d4b5aa;
+}
+.pointer-particle {
+  width: 4px;
+  height: 4px;
+  margin: -2px;
+  border-radius: 50%;
+  background: #c5e7c4;
+  box-shadow: 0 0 5px #b1d4b580;
+  opacity: 0;
+}
+@media (prefers-reduced-motion: reduce),
+  (any-hover: none),
+  (any-pointer: none) {
+  /* JS also removes the high-frequency listener on unsupported devices. */
+  .pointer-effects {
+    display: none;
+  }
+}

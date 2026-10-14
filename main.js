@@ -22,7 +22,10 @@ function updateAmbience() {
   toggle.disabled = motionPreference.matches;
   toggle.title = motionPreference.matches
     ? "已依系統設定減少動態效果"
-    : "開啟或關閉森林微光";
+    : "開啟或關閉森林微光與滑鼠特效";
+  document.dispatchEvent(
+    new CustomEvent("ambiencechange", { detail: { active } }),
+  );
 }
 
 toggle.hidden = false;

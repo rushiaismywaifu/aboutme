@@ -1,56 +1,254 @@
-<!DOCTYPE html>
-<html lang="zh-TW" prefix="og: http://ogp.me/ns#">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Rushia我婆 - 死靈法師的個人網站">
-    <meta name="theme-color" content="#007bff">
-
-    <!-- Open Graph -->
-    <meta property="og:title" content="Rushia我婆">
-    <meta property="og:description" content="雖然她死ㄌ">
-    <meta property="og:url" content="https://rushiaismywaifu.github.io/aboutme">
-    <meta property="og:image" content="https://raw.githubusercontent.com/rushiaismywaifu/rushiaismywaifu.github.io/main/image.png">
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Rushia My Beloved">
-
-    <!-- Preconnect for performance -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="https://raw.githubusercontent.com/rushiaismywaifu/rushiaismywaifu.github.io/main/favicon.ico" type="image/x-icon">
-    <title>死靈法師</title>
-</head>
-<body>
-    <!-- 自訂游標 (僅桌面端) -->
-    <div class="custom-cursor" id="cursor"></div>
-    <canvas id="particles"></canvas>
-
-    <div class="background">
-        <div class="content">
-            <img
-                src="https://raw.githubusercontent.com/rushiaismywaifu/rushiaismywaifu.github.io/main/image.png"
-                alt="Rushia 頭像"
-                class="avatar"
-                loading="lazy"
-            >
-            <h1 class="title">Rushia我婆</h1>
-            <p class="subtitle">這是我的網站</p>
-            <div class="button-group">
-                <a href="https://rushiaismywaifu.github.io" class="button">
-                    <span class="button-icon">🦋</span>
-                    Rushia
-                </a>
-                <a href="https://chikenscrach.github.io" class="button button-secondary">
-                    <span class="button-icon">🎨</span>
-                    Rurudo
-                </a>
+<!doctype html>
+<html lang="zh-Hant" prefix="og: http://ogp.me/ns#">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Rushia我婆 — 死靈法師的小小世界。收藏喜歡的事物，也留一個角落給你。"
+    />
+    <meta name="theme-color" content="#101915" />
+    <meta property="og:title" content="Rushia我婆 · 死靈法師" />
+    <meta
+      property="og:description"
+      content="死靈法師的小小世界。收藏喜歡的事物，也留一個角落給你。"
+    />
+    <meta
+      property="og:url"
+      content="https://rushiaismywaifu.github.io/aboutme/"
+    />
+    <meta
+      property="og:image"
+      content="https://rushiaismywaifu.github.io/aboutme/assets/avatar.png"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Rushia My Beloved" />
+    <link rel="icon" href="assets/favicon.png" type="image/png" sizes="32x32" />
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" sizes="any" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="cursor.js" defer></script>
+    <script src="main.js" defer></script>
+    <title>Rushia我婆 · 死靈法師的小小世界</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">跳至主要內容</a>
+    <svg
+      class="icon-library"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <symbol id="butterfly" viewBox="0 0 32 32">
+        <path
+          d="M16 15C12 6 3 3 3 9c0 5 4 8 10 8C5 15 5 25 9 25c3 0 6-5 7-8 1 3 4 8 7 8 4 0 4-10-4-8 6 0 10-3 10-8 0-6-9-3-13 6Z"
+          fill="currentColor"
+        />
+        <path
+          d="M16 14v10m0-10-3-5m3 5 3-5"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.3"
+          stroke-linecap="round"
+        />
+      </symbol>
+      <symbol id="arrow" viewBox="0 0 24 24">
+        <path
+          d="M5 19 19 5M5 5h14v14"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </symbol>
+      <symbol id="sparkle" viewBox="0 0 24 24">
+        <path
+          d="m12 2 2.5 7.5L22 12l-7.5 2.5L12 22l-2.5-7.5L2 12l7.5-2.5Z"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.3"
+        />
+      </symbol>
+    </svg>
+    <div class="site-shell">
+      <header class="site-header">
+        <a class="brand" href="#" aria-label="Rushia 首頁"
+          ><svg aria-hidden="true"><use href="#butterfly" /></svg
+          ><span>rushia<span class="brand-dot">.</span></span></a
+        >
+        <nav aria-label="主要導覽">
+          <a class="nav-about" href="#about">關於我</a
+          ><a href="#links">我的連結 <span aria-hidden="true">↗</span></a>
+        </nav>
+        <span class="header-note"><i></i> A little corner of the internet</span>
+      </header>
+      <main id="main">
+        <section class="hero" id="about" aria-labelledby="hero-title">
+          <div class="hero-copy">
+            <div class="eyebrow">
+              <span class="short-line"></span> WELCOME TO MY WORLD
             </div>
-        </div>
+            <div class="profile-label">
+              <img
+                src="assets/avatar.png"
+                alt="微笑的 Rushia 頭像"
+                width="36"
+                height="36"
+              /><span
+                >嗨，我是死靈法師
+                <span class="wave" aria-hidden="true">✳</span></span
+              >
+            </div>
+            <h1 id="hero-title">
+              <span class="name">Rushia</span
+              ><span class="chinese-title"
+                >我婆<span class="title-period">。</span
+                ><svg aria-hidden="true"><use href="#butterfly" /></svg
+              ></span>
+            </h1>
+            <p class="intro">
+              這是我的網站，也是我的小小世界。<br />收藏喜歡的事物，也留一個角落給你。
+            </p>
+            <a class="explore-button" href="#links"
+              >來逛逛吧 <span aria-hidden="true">↗</span></a
+            >
+            <div class="hero-caption">
+              <span></span> SOME THINGS STAY IN YOUR HEART, ALWAYS.
+            </div>
+          </div>
+          <div class="hero-art">
+            <div class="art-orbit" aria-hidden="true"></div>
+            <span class="art-coordinate" aria-hidden="true"
+              >A PLACE FOR THE THINGS I LOVE</span
+            >
+            <div class="art-window">
+              <img
+                class="forest"
+                src="assets/forest.webp"
+                alt="月光下的幽靜森林，薄荷綠蝴蝶與微光在霧中飛舞"
+                width="928"
+                height="1152"
+                fetchpriority="high"
+              />
+              <div class="fireflies" aria-hidden="true">
+                <i></i><i></i><i></i><i></i><i></i><i></i>
+              </div>
+              <div class="art-text">
+                <svg aria-hidden="true"><use href="#butterfly" /></svg
+                ><span>ずっと、好き。</span><small>MY BELOVED, ALWAYS.</small>
+              </div>
+            </div>
+            <span class="art-star star-one" aria-hidden="true">✧</span
+            ><span class="art-star star-two" aria-hidden="true">✦</span>
+            <div class="memory-label">
+              <span class="status-dot"></span> 有些喜歡，一直都在。<svg
+                aria-hidden="true"
+              >
+                <use href="#sparkle" />
+              </svg>
+            </div>
+            <span class="art-index" aria-hidden="true"
+              >01 / FOREVER IN MY HEART</span
+            >
+          </div>
+        </section>
+        <section class="links-section" id="links" aria-labelledby="links-title">
+          <div class="section-heading">
+            <h2 id="links-title">前往我的小宇宙 <span>EXPLORE</span></h2>
+            <span class="section-note"
+              >喜歡的，都在這裡 <span aria-hidden="true">↙</span></span
+            >
+          </div>
+          <div class="link-grid">
+            <a
+              class="world-card rushia-card"
+              href="https://rushiaismywaifu.github.io"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="前往 Rushia 網站（在新分頁開啟）"
+            >
+              <span class="card-icon"
+                ><svg aria-hidden="true"><use href="#butterfly" /></svg
+              ></span>
+              <div class="card-copy">
+                <div class="card-kicker">MY BELOVED</div>
+                <h3>Rushia <span>潤羽るしあ</span></h3>
+                <p>那一抹綠色，永遠在心裡。</p>
+              </div>
+              <span class="card-arrow"
+                ><svg aria-hidden="true"><use href="#arrow" /></svg
+              ></span>
+              <svg class="card-decoration" aria-hidden="true">
+                <use href="#butterfly" />
+              </svg>
+            </a>
+            <a
+              class="world-card rurudo-card"
+              href="https://chikenscrach.github.io"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="前往 Rurudo 網站（在新分頁開啟）"
+            >
+              <span class="card-icon"
+                ><svg aria-hidden="true" viewBox="0 0 32 32">
+                  <path
+                    d="m20 5 7 7-13 13-9 2 2-9Z"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="m17 8 7 7M7 18l7 7M5 27l6-6"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                  />
+                  <path
+                    d="M5 5v6M2 8h6"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                  /></svg
+              ></span>
+              <div class="card-copy">
+                <div class="card-kicker">ANOTHER LITTLE WORLD</div>
+                <h3>Rurudo <span>るるど</span></h3>
+                <p>走進另一個喜歡的世界。</p>
+              </div>
+              <span class="card-arrow"
+                ><svg aria-hidden="true"><use href="#arrow" /></svg
+              ></span>
+              <svg class="card-decoration" aria-hidden="true">
+                <use href="#sparkle" />
+              </svg>
+            </a>
+          </div>
+          <p class="links-hint">
+            <span aria-hidden="true">↗</span>
+            連結會在新分頁開啟，不用急著離開這裡。
+          </p>
+        </section>
+      </main>
+      <footer class="site-footer">
+        <p>
+          © <span id="year">2026</span> Rushia我婆
+          <span class="footer-divider">/</span> Made with
+          <span class="heart">♡</span> & a little magic.
+        </p>
+        <button
+          class="ambience-toggle"
+          id="ambience-toggle"
+          type="button"
+          aria-pressed="false"
+          hidden
+        >
+          <svg aria-hidden="true"><use href="#sparkle" /></svg>微光效果<span
+            class="toggle-track"
+            aria-hidden="true"
+          ></span
+          ><span id="ambience-state" class="sr-only">關閉</span></button
+        ><a class="back-top" href="#" aria-label="回到頁首"
+          >回到頂端 <span aria-hidden="true">↑</span></a
+        >
+      </footer>
     </div>
-
-    <script src="main.js"></script>
-</body>
+  </body>
 </html>

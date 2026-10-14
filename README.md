@@ -29,6 +29,8 @@ node --test tests/*.test.cjs
 - `cursor.js`：按需更新的滑鼠柔光與粒子拖尾。
 - `main.js`：可選的微光效果；即使停用 JavaScript，內容與連結仍可使用。
 - `test.html`：原有的獨立開關示範頁，未修改。
+- `assets/favicon.svg`：墨綠圓角底與薄荷綠蝴蝶，沿用頁首圖案；純向量、無外部依賴。
+- `assets/favicon.png`：由 SVG 匯出的 32×32 PNG，相容不支援 SVG favicon 的瀏覽器。
 - `assets/avatar.png`：原網站使用的頭像，改為本機載入。
 - `assets/forest.webp`：AI 生成的森林蝴蝶插畫，已壓縮為 WebP。
 - `assets/noto-tc-subset.woff2`：Noto Sans TC 的頁面文字子集，採 SIL Open Font License（見 `assets/OFL.txt`）。新增文字若未包含在子集中，會使用系統字型。
